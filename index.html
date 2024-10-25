@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="reference.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<style>
+*{
+box-sizing: border-box;
+padding: 0%;
+margin: 0%;
+
+}
+body{
+    margin: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(-45deg, #ee7752, #f197b9, #5bbee2, #23d5ab);
+
+}
+.Calculator{
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: rgb(124, 134, 134);
+    border-radius: 15px;
+    width: 300px;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2),
+                -2px -2px 5px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    
+}
+#inputValue{
+    width: 100%;
+    height: 100px;
+    padding: 20px;
+    font-size: 2rem  !important;
+    text-align: right;
+    border: none;
+    background-color: rgb(90, 83, 90);
+    color: rgb(255, 255, 255);
+}
+#data{
+    display:grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 7px;
+    padding: 25px !important;
+}
+
+button{
+    width: 50px !important;
+    height: 60px !important;
+    border-radius: 50% !important;
+    border: none!important;
+    background-color: hsl(147, 4%, 40%) !important;
+    color: rgb(254, 255, 254)  !important;
+    font-size: 1.3rem  !important ;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+    font-weight: bold !important;
+    
+}
+
+.Calculator:hover {
+    
+    box-shadow: 5px 5px 0px rgba(220, 9, 9, 0.4);
+    transform: scale(1.05); 
+}
+button:hover{
+    background-color:  hsl(142, 24%, 67%)!important;
+    transform: scale(1.2);
+    color: rgb(0, 0, 0)  !important;
+    box-shadow: 7px 7px 5px rgba(0, 0, 0, 0.3);
+}
+button:active {
+    transform: scale(1.1) !important; 
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2); 
+}
+#danger-btn:hover{
+    background-color:  hsl(142, 24%, 67%)!important;
+    transform: scale(1.2);
+    color: rgb(237, 8, 8)  !important;
+}
+#operator{
+    display: flex !important;
+    justify-content: center!important;
+    align-items: center!important;
+    font-size: 1.5rem !important;
+}
+#operator:hover{
+    background-color: hsl(141, 81%, 85%)!important;
+    transform: scale(1.2);
+    color: rgb(245, 67, 2)  !important;
+}
+#equal-btn{
+    display: flex !important;
+    justify-content: center!important;
+    align-items: center!important;
+    
+}
+#equal-btn:hover{
+    background-color: hsl(141, 81%, 85%)!important;
+    transform: scale(1.2);
+    color: rgb(9, 45, 247)  !important;
+}
+</style>
+<body>
+    <div class="Calculator">
+        <input id="inputValue" class="form-control mb-2" >
+        <div id="data" class="row">
+            <button id="danger-btn"onclick="Toclear()"class="btn btn-dark"  >AC</button>
+            <button id="operator"onclick="TODisplay('/')" class="btn btn-dark">/</button>
+            <button id="operator"onclick="TODisplay('%')"class="btn btn-dark">%</button>
+            <button id="danger-btn"onclick="TODelete()" class="col btn btn-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backspace-fill" viewBox="0 0 16 16">
+            <path d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8z"/></svg></button>
+            <button onclick="TODisplay('7')" class="btn btn-dark">7</button>
+            <button onclick="TODisplay('8')" class="btn btn-dark">8</button>
+            <button onclick="TODisplay('9')" class="btn btn-dark">9</button>
+            <button id="operator" onclick="TODisplay('*')" class="btn btn-dark">*</button>
+            
+            <button onclick="TODisplay('4')" class="btn btn-dark">4</button>
+            <button onclick="TODisplay('5')" class="btn btn-dark">5</button>
+            <button onclick="TODisplay('6')" class="btn btn-dark">6</button>
+            <button id="operator" onclick="TODisplay('-')" class="btn btn-dark">-</button>
+            
+            <button onclick="TODisplay('1')" class="btn btn-dark">1</button>
+            <button onclick="TODisplay('2')" class="btn btn-dark">2</button>
+            <button onclick="TODisplay('3')" class="btn btn-dark">3</button>
+            <button id="operator" onclick="TODisplay('+')" class="btn btn-dark" >+</button>
+            <button onclick="TODisplay('00')" class="btn btn-dark">00</button>
+            <button onclick="TODisplay('0')" class="btn btn-dark">0</button>
+            <button id="operator" onclick="TODisplay('.')"class="btn btn-dark">.</button>
+        
+            
+            <button id="equal-btn" onclick="TOCalculate()" class="btn btn-primary">=</button>
+        </div>
+    </div>
+
+    <script>
+        const inputValue = document.getElementById("inputValue");
+        // Function to display values;
+        function TODisplay(input) {
+            inputValue.value += input;
+        }
+
+        // Function to clear the input field;
+        function Toclear() {
+            inputValue.value = "";
+        }
+        // Function to Delete the input field;
+        function TODelete() {
+            inputValue.value = inputValue.value.slice(0, -1); // It helps to Remove the last character
+        }
+        // Function to Calculation;
+        function TOCalculate() {
+    try {
+
+      let result = eval(inputValue.value); 
+        // If the result is invalid or undefined, throw an error;
+        if (result === undefined || inputValue.value === "" || isNaN(result)) {
+            throw new Error("Invalid Input");
+        }
+        result=Number(result.toFixed(5));//it is used to fix Limit result to 5 decimal places;
+        inputValue.value=result;
+    } catch (error) {
+        inputValue.value = "ERROR";
+        setTimeout(() => {
+            inputValue.value = "0";  // it clears the inputfield after 1 sec if user gets error 
+        }, 1000);  
+    }
+}
+document.addEventListener("keydown", (event) => {
+        const key = event.key;
+        if (!isNaN(key) || key === ".") {
+            TODisplay(key);
+        
+        }
+        else if (key === "+" || key === "-" || key === "*" || key === "/") {
+            TODisplay(key);
+        }
+        else if (key === "Enter" || key === "=") {
+            event.preventDefault(); 
+            TOCalculate();
+        }
+        else if (key === "Backspace") {
+            TODelete();
+        }
+         else if (key === "Escape") {
+            Toclear();
+        }
+    });
+
+    </script>
+</body>
+</html>
